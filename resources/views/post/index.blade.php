@@ -229,6 +229,6 @@
     <!-- feature_post end-->
 
     <!-- social_connect_part part start-->
-    @include('includes.blog.social_images')
+    @include('includes.post.social_images')
     <!-- social_connect_part part start-->
 @endsection
