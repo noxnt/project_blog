@@ -33,9 +33,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
         route::get('/', 'IndexController')->name('admin.category.index');
         route::post('/', 'StoreController')->name('admin.category.store');
-        route::get('/{post}', 'ShowController')->name('admin.category.show');
-        route::patch('/{post}', 'UpdateController')->name('admin.category.update');
-        route::delete('/{post}', 'DestroyController')->name('admin.category.destroy');
+        route::get('/{category}', 'ShowController')->name('admin.category.show');
+        route::patch('/{category}', 'UpdateController')->name('admin.category.update');
+        route::delete('/{category}', 'DestroyController')->name('admin.category.destroy');
     });
 });
 

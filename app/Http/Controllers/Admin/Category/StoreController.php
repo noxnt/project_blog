@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin\Category;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\StoreRequest;
 
-class StoreController extends Controller
+class StoreController extends BaseController
 {
-    public function __invoke()
+    public function __invoke(StoreRequest $request)
     {
-        dd('store');
+        $data = $request->validated();
+
+        $this->service->store($data);
+
+        return redirect()->route('admin.category.index');
     }
 }

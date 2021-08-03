@@ -1,0 +1,19 @@
+.btn-badge {
+    font-size: 1rem;
+    padding: 0.25em 0.4em;
+    line-height: 1;
+    border-width: 0;
+    font-weight: 700;
+}
+
+.btn-badge:hover {
+    color: #fff !important;
+}
+
+.btn-light-border {
+    border-color: #6c757d !important;
+}
+
+.form-textarea {
+    resize: none;
+}
