@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <!-- Custom style -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <!-- themify CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}">
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">

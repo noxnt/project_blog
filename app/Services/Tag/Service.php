@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\Services\Category;
+namespace App\Services\Tag;
 
-use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 
 class Service
@@ -12,7 +12,9 @@ class Service
     {
         try {
             Db::beginTransaction();
-            Category::create($data);
+
+            Tag::create($data);
+
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
@@ -20,19 +22,19 @@ class Service
         }
     }
 
-    public function update($category, $data)
+    public function update($tag, $data)
     {
         try {
             Db::beginTransaction();
 
-            $category->update($data);
+            $tag->update($data);
 
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
             return $exception->getMessage();
         }
-        return $category->fresh();
+        return $tag->fresh();
     }
 //
 //    public function destroy($photoTag, $photo)
