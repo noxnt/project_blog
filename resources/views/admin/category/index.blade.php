@@ -31,6 +31,10 @@
         </tbody>
     </table>
 
+    <div class="admin-pagination mb-2">
+        {{ $categories->withQueryString()->links() }}
+    </div>
+
     <h2 class="mt-5 mb-3">Create category</h2>
     <form action="{{ route('admin.category.store') }}" method="POST">
     @csrf

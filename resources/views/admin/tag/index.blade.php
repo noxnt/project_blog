@@ -29,6 +29,10 @@
         </tbody>
     </table>
 
+    <div class="admin-pagination mb-2">
+        {{ $tags->withQueryString()->links() }}
+    </div>
+
     <h2 class="mt-5 mb-3">Create tag</h2>
     <form action="{{ route('admin.tag.store') }}" method="POST">
     @csrf

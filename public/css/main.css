@@ -23,3 +23,61 @@
     color: #444;
     cursor: pointer;
 }
+
+.admin-pagination .pagination .page-item .page-link {
+    color: #fff !important;
+    padding: 8px 15px;
+    font-size: 1.1rem;
+}
+
+.admin-pagination .pagination .page-item .page-link:hover {
+    border-color: #fff;
+}
+
+.admin-pagination .pagination .active .page-link {
+    border-color: #fff;
+    background-color: #fff !important;
+    color: #444 !important;
+}
+
+.admin-pagination .pagination .active .page-link:hover {
+    color: #444 !important;
+}
+
+.admin-pagination .pagination .disabled .page-link {
+    color: #6c757d !important;
+}
+
+/* Create/update post admin */
+.tags-checkbox {
+    display: none;
+}
+
+.tags-label {
+    padding: 0 3px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.tags-checkbox:checked + .tags-label .tag-badge {
+    background-color: #28a745;
+}
+
+.tags-checkbox:checked + .tags-label {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.category-prepend-label .input-group-text {
+    height: calc(2.25rem + 2px);
+    font-weight: normal !important;
+    color: rgba(255,255,255,0.5);
+}
+
+.status-toggle-publish.active {
+    background-color: #28a745 !important;
+}
+
+.status-toggle-unpublish.active {
+    background-color: #ffc107 !important;
+}

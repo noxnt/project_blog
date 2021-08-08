@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers\Admin\Post;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Filters\PostFilter;
+use App\Http\Requests\Post\FilterRequest;
+use App\Models\Post;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
-    public function __invoke()
+    public function __invoke(FilterRequest $request)
     {
-        return view('admin.post.index');
+        $data = $request->validated();
+
+        $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
+
+        $posts = Post::filter($filter)->paginate(20);
+
+        $posts = $this->service->index($posts);
+
+        return view('admin.post.index', compact('posts'));
     }
 }

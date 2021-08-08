@@ -15,7 +15,7 @@ class IndexController extends Controller
         $data = $request->validated();
         $filter = app()->make(TagFilter::class, ['queryParams' => array_filter($data)]);
 
-        $tags = Tag::filter($filter)->get();
+        $tags = Tag::filter($filter)->paginate(20);
 
         foreach ($tags as $tag) {
             $tag['count'] = PostTag::where('tag_id', $tag['id'])->count();

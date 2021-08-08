@@ -10,7 +10,7 @@ class ShowController extends Controller
 {
     public function __invoke(Tag $tag)
     {
-        $posts = $tag->posts()->get();
+        $posts = $tag->posts()->paginate(20);
 
         foreach($posts as $post) {
             $category = Category::find($post->category_id);

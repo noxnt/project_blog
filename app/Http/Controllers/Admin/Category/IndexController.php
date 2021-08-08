@@ -15,7 +15,7 @@ class IndexController extends Controller
         $data = $request->validated();
         $filter = app()->make(CategoryFilter::class, ['queryParams' => array_filter($data)]);
 
-        $categories = Category::filter($filter)->get();
+        $categories = Category::filter($filter)->paginate(20);
 
         foreach ($categories as $category) {
             $category['count'] = Post::where('category_id', $category['id'])->count();

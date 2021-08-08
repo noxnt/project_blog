@@ -16,7 +16,7 @@
         </div>
     </form>
 
-    <h2>{{ count($posts) }} posts with this tag:</h2>
+    <h2>{{ $posts->total() }} posts with this tag:</h2>
     <table class="table">
         <thead>
         <tr>
@@ -25,12 +25,11 @@
             <th scope="col">Category</th>
             <th scope="col">Preview</th>
             <th scope="col">Status</th>
-            <th scope="col">Detail</th>
         </tr>
         </thead>
         <tbody>
         @foreach($posts as $post)
-            <tr>
+            <tr class="link-detail">
                 <th scope="row">{{ $post['id'] }}</th>
                 <td>{{ $post['title'] }}</td>
                 <td>{{ $post['category_title'] }}</td>
@@ -40,9 +39,12 @@
                         {{ $post['is_published'] == 1 ? 'Published' : 'Unpublished' }}
                     </span>
                 </td>
-                <td scope="col"><a class="badge badge-primary btn-badge" href="">To post</a></td>
             </tr>
         @endforeach
         </tbody>
     </table>
+
+    <div class="admin-pagination mb-2">
+        {{ $posts->withQueryString()->links() }}
+    </div>
 @endsection

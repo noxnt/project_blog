@@ -9,7 +9,7 @@ class ShowController extends Controller
 {
     public function __invoke(Category $category)
     {
-        $posts = $category->posts()->get();
+        $posts = $category->posts()->paginate(20);
 
         return view('admin.category.show', compact('category', 'posts'));
     }
