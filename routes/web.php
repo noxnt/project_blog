@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,7 @@ Route::group(['namespace' => 'Post'], function () {
 });
 
 // Admin
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'can:manager-admin-access'], function () {
     Route::get('/', 'IndexController')->name('admin.index');
 
     // Posts

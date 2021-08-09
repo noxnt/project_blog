@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostTag extends Model
+class Role extends Model
 {
     use HasFactory;
 
-    protected $table = 'post_tag';
+    protected $table = 'roles';
     protected $guarded = [];
     public $timestamps = false;
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

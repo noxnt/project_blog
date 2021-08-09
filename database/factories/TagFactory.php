@@ -22,7 +22,7 @@ class TagFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence(1),
+            'title' => $this->faker->sentence(2),
         ];
     }
 }

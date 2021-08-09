@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Role;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
@@ -25,5 +26,11 @@ class DatabaseSeeder extends Seeder
             $tagsIds = $tags->random(5)->pluck('id');
             $post->tags()->attach($tagsIds);
         }
+
+        Role::insert([
+            ['name' => 'user'],
+            ['name' => 'manager'],
+            ['name' => 'admin'],
+        ]);
     }
 }

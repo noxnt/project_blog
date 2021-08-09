@@ -25,8 +25,6 @@ class IndexController extends BaseController
             $category = $category->posts->count();
         }
 
-        dd($categories);
-
         return view('post.index', compact('posts'));
     }
 }
