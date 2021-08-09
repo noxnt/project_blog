@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/auth/', 'HomeController@index');
+
 Route::group(['namespace' => 'Post'], function () {
     route::get('/', 'IndexController')->name('post.index');
+//    route::get('/', 'ShowController')->name('post.show');
 });
 
 // Admin

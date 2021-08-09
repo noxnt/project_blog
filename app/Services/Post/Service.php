@@ -12,6 +12,7 @@ class Service
     public function index($posts)
     {
         foreach ($posts as $post) {
+            $post['date'] = $this->getDate($post);
             $post['tags'] = $post->tags()->pluck('title');
             $post['category'] = $post->category()->value('title');
         }
@@ -101,5 +102,12 @@ class Service
             if (strlen($arr[$i]) < 1) unset($arr[$i]);
         }
         return $arr;
+    }
+
+    public function getDate($post)
+    {
+        $time = strtotime($post['created_at']);
+        $date = date('F j, Y', $time ).' at'.date(' H:i', $time);
+        return $date;
     }
 }

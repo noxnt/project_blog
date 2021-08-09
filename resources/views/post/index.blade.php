@@ -18,110 +18,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single_post post_1">
-                                <div class="single_post_img">
-                                    <img src="{{ asset('assets/img/post/post_18.png') }}" alt="">
-                                </div>
-                                <div class="single_post_text text-center">
-                                    <a href="category.html"><h5> Fashion / Life style</h5></a>
-                                    <a href="single-blog.html"><h2>Your life is a product your
-                                            right decisions</h2></a>
-                                    <p>Posted on April 15, 2019</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single_post post_1">
-                                <div class="single_post_img">
-                                    <img src="{{ asset('assets/img/post/post_19.png') }}" alt="">
-                                </div>
-                                <div class="single_post_text text-center">
-                                    <a href="category.html"><h5> Fashion / Life style</h5></a>
-                                    <a href="single-blog.html"><h2>Your life is a product your
-                                            right decisions</h2></a>
-                                    <p>Posted on April 15, 2019</p>
+                        @foreach($posts as $post)
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="single_post post_1">
+                                    <div class="single_post_img">
+                                        <img src="{{ asset('assets/img/post/post_18.png') }}" alt="">
+                                    </div>
+                                    <div class="single_post_text text-center">
+                                        <a href="to_cat"><h5>{{ $post->category }}</h5></a>
+                                        <a href="single-blog.html"><h2>{{ $post->title }}</h2></a>
+                                        <p>{{ $post->date }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single_post post_1">
-                                <div class="single_post_img">
-                                    <img src="{{ asset('assets/img/post/post_20.png') }}" alt="">
-                                </div>
-                                <div class="single_post_text text-center">
-                                    <a href="category.html"><h5> Fashion / Life style</h5></a>
-                                    <a href="single-blog.html"><h2>Your life is a product your
-                                            right decisions</h2></a>
-                                    <p>Posted on April 15, 2019</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single_post post_1">
-                                <div class="single_post_img">
-                                    <img src="{{ asset('assets/img/post/post_21.png') }}" alt="">
-                                </div>
-                                <div class="single_post_text text-center">
-                                    <a href="category.html"><h5> Fashion / Life style</h5></a>
-                                    <a href="single-blog.html"><h2>Your life is a product your
-                                            right decisions</h2></a>
-                                    <p>Posted on April 15, 2019</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single_post post_1">
-                                <div class="single_post_img">
-                                    <img src="{{ asset('assets/img/post/post_22.png') }}" alt="">
-                                </div>
-                                <div class="single_post_text text-center">
-                                    <a href="category.html"><h5> Fashion / Life style</h5></a>
-                                    <a href="single-blog.html"><h2>Your life is a product your
-                                            right decisions</h2></a>
-                                    <p>Posted on April 15, 2019</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single_post post_1">
-                                <div class="single_post_img">
-                                    <img src="{{ asset('assets/img/post/post_23.png') }}" alt="">
-                                </div>
-                                <div class="single_post_text text-center">
-                                    <a href="category.html"><h5> Fashion / Life style</h5></a>
-                                    <a href="single-blog.html"><h2>Your life is a product your
-                                            right decisions</h2></a>
-                                    <p>Posted on April 15, 2019</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single_post post_1">
-                                <div class="single_post_img">
-                                    <img src="{{ asset('assets/img/post/post_24.png') }}" alt="">
-                                </div>
-                                <div class="single_post_text text-center">
-                                    <a href="category.html"><h5> Fashion / Life style</h5></a>
-                                    <a href="single-blog.html"><h2>Your life is a product your
-                                            right decisions</h2></a>
-                                    <p>Posted on April 15, 2019</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single_post post_1">
-                                <div class="single_post_img">
-                                    <img src="{{ asset('assets/img/post/post_25.png') }}" alt="">
-                                </div>
-                                <div class="single_post_text text-center">
-                                    <a href="category.html"><h5> Fashion / Life style</h5></a>
-                                    <a href="single-blog.html"><h2>Your life is a product your
-                                            right decisions</h2></a>
-                                    <p>Posted on April 15, 2019</p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class="page_pageniation">
                         <nav aria-label="Page navigation example">
@@ -156,12 +66,9 @@
                             </div>
                             <div class="single_catagory_item category">
                                 <ul class="list-unstyled">
-                                    <li><a href="category.html">Culture</a> <span>(15)</span></li>
-                                    <li><a href="category.html">Creative Design</a> <span>(15)</span></li>
-                                    <li><a href="category.html">Illustration</a> <span>(15)</span></li>
-                                    <li><a href="category.html">Production</a> <span>(15)</span></li>
-                                    <li><a href="category.html">Mangement</a> <span>(15)</span></li>
-                                    <li><a href="category.html">Branding</a> <span>(15)</span></li>
+                                    @foreach($posts->take(10) as $post)
+                                        <li><a href="category.html">{{ $post->category }}</a> <span>(15)</span></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
