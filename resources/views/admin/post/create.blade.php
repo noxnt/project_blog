@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <form action="{{ route('admin.post.store') }}" method="POST">
+    <form action="{{ route('admin.post.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
         <div class="row">
             <div class="col-md-8">
@@ -37,7 +37,23 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Content" rows="10" name="content" style="min-height: 100%"></textarea>
+                    <textarea class="form-control" placeholder="Content" rows="10" name="content" id="summernote"></textarea>
+                </div>
+
+                <div class="form-group d-flex">
+                    <div class="input-group w-50 mr-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="preview-image" name="preview_image">
+                            <label for="preview-image" class="custom-file-label">Choose preview image</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group w-50">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="main-image" name="main_image">
+                            <label for="main-image" class="custom-file-label">Choose main image</label>
+                        </div>
+                    </div>
                 </div>
             </div>
 

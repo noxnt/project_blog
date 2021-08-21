@@ -13,4 +13,8 @@ $(document).ready(function() {
             ['codeview', ['fullscreen', 'codeview', 'help']]
         ]
     });
+
+    $(function () {
+       bsCustomFileInput.init();
+    });
 });

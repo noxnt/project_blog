@@ -2,7 +2,12 @@
 @section('content')
     <div class="row mb-3">
         <div class="w-75">
-            <h2 class="m-0">Posts ({{ $posts->total() }}):</h2>
+            <div class="d-flex">
+                <h2 class="m-0">Posts ({{ $posts->total() }}):</h2>
+                <form class="input-group w-75 search-form" action="{{ route('admin.post.index') }}" method="GET">
+                    <input type="search" class="form-control rounded search-input" placeholder="Search by title" name="title">
+                </form>
+            </div>
         </div>
         <a href="{{ route('admin.post.create') }}" type="button" class="btn btn-light w-25">Create new post</a>
     </div>
@@ -12,9 +17,9 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Title</th>
+            <th scope="col">Preview</th>
             <th scope="col">Category</th>
             <th scope="col">Tags</th>
-            <th scope="col">Preview</th>
             <th scope="col">Status</th>
             <th scope="col">Delete</th>
         </tr>
@@ -24,20 +29,24 @@
             <tr class="link-detail">
                 <th scope="row">{{ $post['id'] }}</th>
                 <td>{{ $post['title'] }}</td>
-                <td>{{ $post['category'] }}</td>
+                <td>{{ $post['preview'] }}</td>
+                <td>
+                    <a class="badge badge-secondary btn-badge" href="{{ route('admin.category.show', $post->category->id) }}">
+                        {{ $post->category->title }}
+                    </a>
+                </td>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-secondary dropdown-toggle btn-badge" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ count($post['tags']) }} tags
+                            {{ $post->tags->count() }} tags
                         </button>
                         <div class="dropdown-menu">
-                            @foreach($post['tags'] as $tag)
-                                <a class="dropdown-item" href="#">{{ $tag }}</a>
+                            @foreach($post->tags as $tag)
+                                <a class="dropdown-item" href="{{ route('admin.tag.show', $tag->id) }}">{{ $tag->title }}</a>
                             @endforeach
                         </div>
                     </div>
                 </td>
-                <td>{{ $post['preview'] }}</td>
                 <td>
                     <span class="badge badge-{{ $post['is_published'] == 1 ? 'success' : 'secondary' }} btn-badge">
                         {{ $post['is_published'] == 1 ? 'Published' : 'Unpublished' }}

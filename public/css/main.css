@@ -81,3 +81,35 @@
 .status-toggle-unpublish.active {
     background-color: #ffc107 !important;
 }
+
+.search-form .search-input {
+    margin: 0 5px;
+    background-color: transparent !important;
+    outline: none !important;
+    border: none;
+    border-radius: 0 !important;
+    border-bottom: 1px solid #6c757d;
+    font-size: 1.1rem;
+}
+
+.search-form .search-input:hover,
+.search-form .search-input:focus {
+    border-color: #fff;
+}
+
+.search-form .search-input::-webkit-search-decoration,
+.search-form .search-input::-webkit-search-cancel-button,
+.search-form .search-input::-webkit-search-results-button,
+.search-form .search-input::-webkit-search-results-decoration { display: none; }
+
+.image-block {
+    height: 300px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.image-block img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}

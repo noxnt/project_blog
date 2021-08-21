@@ -28,6 +28,8 @@ class UpdateRequest extends FormRequest
             'category_id' => 'required',
             'preview' => 'required|string',
             'content' => 'required|string',
+            'preview_image' => 'nullable|file',
+            'main_image' => 'nullable|file',
             'is_published' => 'required',
             'tags' => 'required_without:newTags',
             'newTags' => 'required_without:tags',

@@ -27,6 +27,8 @@ class PostFactory extends Factory
             'category_id' => Category::get()->random()->id,
             'preview' => $this->faker->text(20),
             'content' => $this->faker->text,
+            'preview_image' => 'images/default.jpg',
+            'main_image' => 'images/default.jpg',
             'is_published' => 1,
         ];
     }

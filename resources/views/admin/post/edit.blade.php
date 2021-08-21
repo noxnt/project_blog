@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <form action="{{ route('admin.post.update', $post->id) }}" method="POST">
+    <form action="{{ route('admin.post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('patch')
         <div class="row">
@@ -41,6 +41,34 @@
 
                 <div class="form-group">
                     <textarea class="form-control" placeholder="Content" rows="10" name="content" id="summernote">{{ $post->content }}</textarea>
+                </div>
+
+                <div class="form-group d-flex">
+                    <div class="input-group w-50 mr-3">
+                        <div class="image-block mb-2 w-100">
+                            <img src="{{ asset('storage/' . $post->preview_image) }}" class="w-100" alt="{{ $post->title }}">
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="preview-image" name="preview_image"
+                                value="{{ asset('storage/' . $post->preview_image) }}">
+                            <label for="preview-image" class="custom-file-label">
+                                {{ $post->preview_image ?? 'Choose preview image' }}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group w-50">
+                        <div class="image-block mb-2 w-100">
+                            <img src="{{ asset('storage/' . $post->main_image) }}" class="w-100" alt="{{ $post->title }}">
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="main-image" name="main_image"
+                                value="{{ asset('storage/' . $post->main_image) }}">
+                            <label for="main-image" class="custom-file-label">
+                                {{ $post->main_image ?? 'Choose main image' }}
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 

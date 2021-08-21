@@ -14,12 +14,12 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-    <!-- Custom style -->
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <!-- themify CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}">
     <!-- Summernote WYSIWYG -->
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
+    <!-- Custom style -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -231,5 +231,7 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <!-- Summernote WYSIWYG -->
 <script src="{{ asset('plugins/summernote/summernote-bs4.js') }}"></script>
+<!-- bs-custom-file-input -->
+<script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 </body>
 </html>

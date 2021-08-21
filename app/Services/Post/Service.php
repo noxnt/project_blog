@@ -6,6 +6,7 @@ namespace App\Services\Post;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Service
 {
@@ -13,8 +14,6 @@ class Service
     {
         foreach ($posts as $post) {
             $post['date'] = $this->getDate($post);
-            $post['tags'] = $post->tags()->pluck('title');
-            $post['category'] = $post->category()->value('title');
         }
 
         return $posts;
@@ -26,7 +25,10 @@ class Service
             Db::beginTransaction();
 
             $tagsIds = $this->getTags($data);
+
             unset($data['tags'], $data['newTags']);
+
+            $data = $this->setImages($data);
 
             $post = Post::create($data);
             $post->tags()->attach($tagsIds);
@@ -44,7 +46,10 @@ class Service
             Db::beginTransaction();
 
             $tagsIds = $this->getTags($data);
+
             unset($data['tags'], $data['newTags']);
+
+            $data = $this->setImages($data);
 
             $post->update($data);
             $post->tags()->sync($tagsIds);
@@ -109,5 +114,16 @@ class Service
         $time = strtotime($post['created_at']);
         $date = date('F j, Y', $time ).' at'.date(' H:i', $time);
         return $date;
+    }
+
+    public function setImages($data)
+    {
+        if (isset($data['preview_image']))
+            $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
+
+        if (isset($data['main_image']))
+            $data['main_image'] = Storage::disk('public')->put('/images', $data['main_image']);
+
+        return $data;
     }
 }

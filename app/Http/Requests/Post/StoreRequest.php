@@ -28,6 +28,8 @@ class StoreRequest extends FormRequest
             'category_id' => 'required',
             'preview' => 'required|string',
             'content' => 'required|string',
+            'preview_image' => 'required|file',
+            'main_image' => 'required|file',
             'is_published' => 'required',
             'tags' => 'required_without:newTags',
             'newTags' => 'required_without:tags',
