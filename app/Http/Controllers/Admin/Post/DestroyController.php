@@ -13,6 +13,6 @@ class DestroyController extends BaseController
 
         $this->service->destroy($postTags, $post);
 
-        return redirect()->route('admin.post.index')->withQuery('?page=6');
+        return redirect()->route('admin.post.index');
     }
 }

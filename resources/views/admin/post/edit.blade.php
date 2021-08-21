@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Content" rows="10" name="content" style="min-height: 100%">{{ $post->content }}</textarea>
+                    <textarea class="form-control" placeholder="Content" rows="10" name="content" id="summernote">{{ $post->content }}</textarea>
                 </div>
             </div>
 

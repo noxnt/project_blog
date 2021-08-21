@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <!-- themify CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}">
+    <!-- Summernote WYSIWYG -->
+    <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -215,6 +217,8 @@
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<!-- jQuery UI -->
+<script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- overlayScrollbars -->
@@ -223,7 +227,9 @@
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
-{{-- Main scripts --}}
+<!-- Main scripts -->
 <script src="{{ asset('js/main.js') }}"></script>
+<!-- Summernote WYSIWYG -->
+<script src="{{ asset('plugins/summernote/summernote-bs4.js') }}"></script>
 </body>
 </html>
