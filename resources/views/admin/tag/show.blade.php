@@ -7,7 +7,11 @@
         @method('patch')
         <div class="row">
             <div class="form-group col-md-5">
-                <input class="form-control" placeholder="Title" name="title" value="{{ $tag->title }}">
+                <input class="form-control @error('title') is-invalid @enderror"
+                    placeholder="Title" name="title" value="{{ $tag->title }}">
+                @error('title')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="form-group col-md-1">
@@ -35,8 +39,8 @@
                 <td>{{ $post['category_title'] }}</td>
                 <td>{{ $post['preview'] }}</td>
                 <td>
-                    <span class="badge badge-{{ $post['is_published'] == 1 ? 'success' : 'secondary' }} btn-badge">
-                        {{ $post['is_published'] == 1 ? 'Published' : 'Unpublished' }}
+                    <span class="badge badge-{{ $post['is_published'] == 1 ? 'success' : 'warning' }} btn-badge">
+                        <i class="fa fa-eye{{ $post['is_published'] == 1 ? '' : '-slash' }}" aria-hidden="true"></i>
                     </span>
                 </td>
             </tr>

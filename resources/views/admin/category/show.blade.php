@@ -8,7 +8,11 @@
         @method('patch')
         <div class="row">
             <div class="form-group col-md-5">
-                <input class="form-control" placeholder="Title" name="title" value="{{ $category->title }}">
+                <input class="form-control @error('title') is-invalid @enderror"
+                    placeholder="Title" name="title" value="{{ $category->title }}">
+                @error('title')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="form-group col-md-1">
@@ -18,8 +22,11 @@
 
         <div class="row">
             <div class="form-group col-md-6">
-                <textarea class="form-control form-textarea" rows="4"
-                placeholder="Description" name="description">{{ $category->description }}</textarea>
+                <textarea class="form-control form-textarea @error('description') is-invalid @enderror"
+                    rows="4" placeholder="Description" name="description">{{ $category->description }}</textarea>
+                @error('description')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
             </div>
         </div>
     </form>
@@ -41,8 +48,8 @@
                 <td>{{ $post['title'] }}</td>
                 <td>{{ $post['preview'] }}</td>
                 <td>
-                    <span class="badge badge-{{ $post['is_published'] == 1 ? 'success' : 'secondary' }} btn-badge">
-                        {{ $post['is_published'] == 1 ? 'Published' : 'Unpublished' }}
+                    <span class="badge badge-{{ $post['is_published'] == 1 ? 'success' : 'warning' }} btn-badge">
+                        <i class="fa fa-eye{{ $post['is_published'] == 1 ? '' : '-slash' }}" aria-hidden="true"></i>
                     </span>
                 </td>
             </tr>

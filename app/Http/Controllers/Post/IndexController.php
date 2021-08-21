@@ -6,7 +6,6 @@ use App\Http\Filters\PostFilter;
 use App\Http\Requests\Post\FilterRequest;
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class IndexController extends BaseController
 {

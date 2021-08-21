@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|unique:tags',
+            'title' => "required|string|unique:tags,title,{$this->tag->id}",
         ];
     }
 }

@@ -18,7 +18,11 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="form-group col-md-8">
-                        <input class="form-control" placeholder="Title" name="title" value="{{ $post->title }}">
+                        <input class="form-control @error('title') is-invalid @enderror"
+                            placeholder="Title" name="title" value="{{ $post->title }}">
+                        @error('title')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="form-group col-md-4">
@@ -36,11 +40,21 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Preview" name="preview" style="min-height: 7vh">{{ $post->preview }}</textarea>
+                    <textarea class="form-control @error('preview') is-invalid @enderror"
+                        placeholder="Preview" name="preview" style="min-height: 7vh">{{ $post->preview }}
+                    </textarea>
+                    @error('preview')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Content" rows="10" name="content" id="summernote">{{ $post->content }}</textarea>
+                    <textarea class="form-control @error('content') is-invalid @enderror"
+                        placeholder="Content" rows="10" name="content" id="summernote">{{ $post->content }}
+                    </textarea>
+                    @error('content')
+                        <p class="text-danger" style="margin-top: -1rem;">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="form-group d-flex">
@@ -49,12 +63,15 @@
                             <img src="{{ asset('storage/' . $post->preview_image) }}" class="w-100" alt="{{ $post->title }}">
                         </div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="preview-image" name="preview_image"
-                                value="{{ asset('storage/' . $post->preview_image) }}">
+                            <input type="file" class="custom-file-input @error('preview_image') is-invalid @enderror"
+                                id="preview-image" name="preview_image" value="{{ asset('storage/' . $post->preview_image) }}">
                             <label for="preview-image" class="custom-file-label">
                                 {{ $post->preview_image ?? 'Choose preview image' }}
                             </label>
                         </div>
+                        @error('preview_image')
+                            <div class="w-100"><p class="text-danger">{{ $message }}</p></div>
+                        @enderror
                     </div>
 
                     <div class="input-group w-50">
@@ -62,12 +79,15 @@
                             <img src="{{ asset('storage/' . $post->main_image) }}" class="w-100" alt="{{ $post->title }}">
                         </div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="main-image" name="main_image"
-                                value="{{ asset('storage/' . $post->main_image) }}">
+                            <input type="file" class="custom-file-input @error('main_image') is-invalid @enderror"
+                                id="main-image" name="main_image" value="{{ asset('storage/' . $post->main_image) }}">
                             <label for="main-image" class="custom-file-label">
                                 {{ $post->main_image ?? 'Choose main image' }}
                             </label>
                         </div>
+                        @error('main_image')
+                            <div class="w-100"><p class="text-danger">{{ $message }}</p></div>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -99,14 +119,20 @@
                                 @foreach($post->tags as $postTag)
                                     {{ $tag->id == $postTag->id ? ' checked' : '' }}
                                 @endforeach
-                                ><label class="tags-label" for="tag{{ $tag->id }}"><span class="badge badge-secondary btn-badge tag-badge">{{ $tag->title }}</span></label>
+                                ><label class="tags-label" for="tag{{ $tag->id }}">
+                                    <span class="badge badge-secondary btn-badge tag-badge">{{ $tag->title }}</span>
+                                </label>
                             @endforeach
 
                             <hr style="background-color: rgba(255,255,255, 0.5) !important">
                             <span style="color: rgba(255,255,255,0.5);">Add tags:</span>
 
                             <div class="form-group mb-0">
-                                <input class="form-control" placeholder="Tag name, tag, tag" name="newTags">
+                                <input class="form-control @error('newTags') is-invalid @enderror"
+                                    placeholder="Tag name, tag, tag" name="newTags">
+                                @error('newTags')
+                                    <div class="w-100"><p class="text-danger">{{ $message }}</p></div>
+                                @enderror
                             </div>
                         </div>
                     </div>

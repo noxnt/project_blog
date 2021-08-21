@@ -1,5 +1,52 @@
 @extends('layouts.admin')
 @section('content')
+    <div class="row mb-3">
+        <div class="d-flex w-100">
+            <h2 class="m-0">Categories ({{ $categories->total() }}):</h2>
+            <form class="input-group w-50 search-form" action="{{ route('admin.category.index') }}" method="GET">
+                <input type="search" class="form-control rounded search-input" placeholder="Search by title" name="title">
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-12 mt-3 pl-0">
+        <button type="button" class="btn btn-light w-25" data-toggle="collapse"
+                data-target="#formCollapse" aria-expanded="false">Create new category
+        </button>
+
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                <div class="collapse multi-collapse" id="formCollapse">
+                    <form action="{{ route('admin.category.store') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="form-group col-md-5">
+                                <input class="form-control @error('title') is-invalid @enderror"
+                                       placeholder="Title" name="title">
+                                @error('title')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-1">
+                                <input type="submit" class="btn btn-dark btn-light-border" value="Create" style="width: 100%">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <textarea class="form-control form-textarea @error('description') is-invalid @enderror"
+                                      rows="4" placeholder="Description" name="description"></textarea>
+                                @error('description')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table class="table">
         <thead>
         <tr>
@@ -17,7 +64,7 @@
                 <td>{{ $category['title'] }}</td>
                 <td>{{ $category['description'] }}</td>
                 <td scope="col"><a class="badge badge-info btn-badge"
-                    href="{{ route('admin.category.show', $category['id']) }}">{{ $category['count'] }}</a>
+                    href="{{ route('admin.post.index', ['category' => $category['id']]) }}">{{ $category['count'] }}</a>
                 </td>
                 <td scope="col">
                     <form action="{{ route('admin.category.destroy', $category['id']) }}" method="POST">
@@ -34,24 +81,4 @@
     <div class="admin-pagination mb-2">
         {{ $categories->withQueryString()->links() }}
     </div>
-
-    <h2 class="mt-5 mb-3">Create category</h2>
-    <form action="{{ route('admin.category.store') }}" method="POST">
-    @csrf
-        <div class="row">
-            <div class="form-group col-md-5">
-                <input class="form-control" placeholder="Title" name="title">
-            </div>
-
-            <div class="form-group col-md-1">
-                <input type="submit" class="btn btn-dark btn-light-border" value="Create" style="width: 100%">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-6">
-                <textarea class="form-control form-textarea" rows="4" placeholder="Description" name="description"></textarea>
-            </div>
-        </div>
-    </form>
 @endsection

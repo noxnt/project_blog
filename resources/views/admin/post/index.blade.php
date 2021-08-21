@@ -48,9 +48,11 @@
                     </div>
                 </td>
                 <td>
-                    <span class="badge badge-{{ $post['is_published'] == 1 ? 'success' : 'secondary' }} btn-badge">
-                        {{ $post['is_published'] == 1 ? 'Published' : 'Unpublished' }}
-                    </span>
+                    <div class="btn-group">
+                        <span class="badge badge-{{ $post['is_published'] == 1 ? 'success' : 'warning' }} btn-badge">
+                            <i class="fa fa-eye{{ $post['is_published'] == 1 ? '' : '-slash' }}" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </td>
                 <td scope="col">
                     <form action="{{ route('admin.post.destroy', $post['id']) }}" method="POST">
