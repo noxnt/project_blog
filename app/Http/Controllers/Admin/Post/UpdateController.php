@@ -11,8 +11,8 @@ class UpdateController extends BaseController
     {
         $data = $request->validated();
 
-        $this->service->update($post, $data);
+        $flash = $this->service->update($post, $data);
 
-        return redirect()->route('admin.post.index');
+        return redirect()->route('admin.post.index')->with($flash);
     }
 }

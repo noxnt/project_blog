@@ -5,6 +5,7 @@ namespace App\Services\Tag;
 
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Service
 {
@@ -12,52 +13,89 @@ class Service
     {
         try {
             Db::beginTransaction();
-
-            Tag::create($data);
-
+            $tag = Tag::create($data);
+            $this->loggingSuccess($tag, 'creating');
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
-            return $exception->getMessage();
+            $this->loggingFailed($exception, 'create');
+
+            return [
+                'message' => 'Failed to create tag!',
+                'status' => 'danger',
+            ];
         }
+
+        return [
+            'message' => 'Tag created successfully!',
+            'status' => 'success',
+        ];
     }
 
     public function update($tag, $data)
     {
         try {
             Db::beginTransaction();
-
             $tag->update($data);
-
+            $this->loggingSuccess($tag, 'updating');
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
-            return $exception->getMessage();
+            $this->loggingFailed($exception, 'update');
+
+            return [
+                'message' => 'Failed to update tag!',
+                'status' => 'danger',
+            ];
         }
-        return $tag->fresh();
+
+        $tag->fresh();
+
+        return [
+            'id' => $tag->id,
+            'flash' => [
+                'message' => 'Tag edited successfully!',
+                'status' => 'success',
+            ],
+        ];
     }
-//
-//    public function destroy($photoTag, $photo)
-//    {
-//        foreach ($photoTag as $row)
-//            $row->delete();
-//
-//        $photo->delete();
-//    }
-//
-//    private function getCategoryId($item)
-//    {
-//        $category = !isset($item['id']) ? Category::create($item) : Category::find($item['id']);
-//        return $category->id;
-//    }
-//
-//    private function getTagsIds($tags)
-//    {
-//        $tagsIds = [];
-//        foreach ($tags as $tag) {
-//            $tag = !isset($tag['id']) ? Tag::create($tag) : Tag::find($tag['id']);
-//            $tagsIds = $tag->id;
-//        }
-//        return $tagsIds;
-//    }
+
+    public function destroy($tag)
+    {
+        try {
+            Db::beginTransaction();
+            $tag->delete();
+            $this->loggingSuccess($tag, 'deleting');
+            Db::commit();
+        } catch (\Exception $exception) {
+            Db::rollBack();
+            $this->loggingFailed($exception, 'delete');
+
+            return [
+                'message' => "Tag can't be deleted, {$tag->posts->count()} belongs to it!",
+                'status' => 'danger',
+            ];
+        }
+
+        return [
+            'message' => 'Tag successfully deleted!',
+            'status' => 'success',
+        ];
+    }
+
+    // Logs
+    private function loggingSuccess ($tag, $action)
+    {
+        Log::channel('debuginfo')->info("Successful $action - tag", [
+            'id' => $tag->id,
+            'title' => $tag->title,
+        ]);
+    }
+
+    private function loggingFailed ($exception, $action)
+    {
+        Log::channel('debuginfo')->error("Failed to $action - tag", [
+            'error' => $exception->getMessage(),
+        ]);
+    }
 }

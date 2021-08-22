@@ -28,7 +28,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-md-1">
-                                <input type="submit" class="btn btn-dark btn-light-border" value="Create" style="width: 100%">
+                                <input type="submit" class="btn btn-dark btn-light-border w-100" value="Create">
                             </div>
                         </div>
 
@@ -60,14 +60,18 @@
         <tbody>
         @foreach($categories as $category)
             <tr class="link-detail">
-                <th scope="row">{{ $category['id'] }}</th>
-                <td>{{ $category['title'] }}</td>
-                <td>{{ $category['description'] }}</td>
+                <th scope="row">{{ $category->id }}</th>
+                <td>
+                    <a class="badge badge-secondary btn-badge"
+                       href="{{ route('admin.category.show', $category->id) }}">{{ $category->title }}
+                    </a>
+                </td>
+                <td>{{ $category->description }}</td>
                 <td scope="col"><a class="badge badge-info btn-badge"
-                    href="{{ route('admin.post.index', ['category' => $category['id']]) }}">{{ $category['count'] }}</a>
+                    href="{{ route('admin.post.index', ['category' => $category->id]) }}">{{ $category->posts->count() }}</a>
                 </td>
                 <td scope="col">
-                    <form action="{{ route('admin.category.destroy', $category['id']) }}" method="POST">
+                    <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST">
                         @csrf
                         @method('delete')
                         <input class="btn btn-danger btn-badge" type="submit" value="Delete">

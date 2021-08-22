@@ -94,6 +94,11 @@
         <!-- Main content -->
         <section class="content pt-3">
             <div class="container-fluid">
+                @if (session('message'))
+                    <div class="alert alert-{{ session('status') }} flash-message" role="alert">
+                        {{ session('message') }}
+                    </div>
+                @endif
                 @yield('content')
             </div>
         </section>

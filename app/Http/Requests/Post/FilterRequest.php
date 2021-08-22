@@ -27,6 +27,7 @@ class FilterRequest extends FormRequest
             'id' => 'integer',
             'title' => 'string',
             'category' => 'integer',
+            'tag' => 'integer',
             'preview' => 'string',
             'content' => 'string',
         ];

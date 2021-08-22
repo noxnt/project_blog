@@ -47,13 +47,17 @@
         <tbody>
         @foreach($tags as $tag)
             <tr class="link-detail">
-                <th scope="row">{{ $tag['id'] }}</th>
-                <td>{{ $tag['title'] }}</td>
+                <th scope="row">{{ $tag->id }}</th>
+                <td>
+                    <a class="badge badge-secondary btn-badge"
+                       href="{{ route('admin.tag.show', $tag->id) }}">{{ $tag->title }}
+                    </a>
+                </td>
                 <td scope="col"><a class="badge badge-info btn-badge"
-                    href="{{ route('admin.tag.show', $tag['id']) }}">{{ $tag['count'] }}</a>
+                    href="{{ route('admin.post.index', ['tag' => $tag->id]) }}">{{ $tag->posts->count() }}</a>
                 </td>
                 <td scope="col">
-                    <form action="{{ route('admin.tag.destroy', $tag['id']) }}" method="POST">
+                    <form action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST">
                         @csrf
                         @method('delete')
                         <input class="btn btn-danger btn-badge" type="submit" value="Delete">

@@ -5,6 +5,7 @@ namespace App\Services\Category;
 
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Service
 {
@@ -12,50 +13,90 @@ class Service
     {
         try {
             Db::beginTransaction();
-            Category::create($data);
+            $category = Category::create($data);
+            $this->loggingSuccess($category, 'creating');
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
-            return $exception->getMessage();
+            $this->loggingFailed($exception, 'create');
+
+            return [
+                'message' => 'Failed to create category!',
+                'status' => 'danger',
+            ];
         }
+
+        return [
+            'message' => 'Category created successfully!',
+            'status' => 'success',
+        ];
     }
 
     public function update($category, $data)
     {
         try {
             Db::beginTransaction();
-
             $category->update($data);
-
+            $this->loggingSuccess($category, 'updating');
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
-            return $exception->getMessage();
+            $this->loggingFailed($exception, 'update');
+
+            return [
+                'message' => 'Failed to update category!',
+                'status' => 'danger',
+            ];
         }
-        return $category->fresh();
+
+        $category->fresh();
+
+        return [
+            'id' => $category->id,
+            'flash' => [
+                'message' => 'Category edited successfully!',
+                'status' => 'success',
+            ],
+        ];
     }
-//
-//    public function destroy($photoTag, $photo)
-//    {
-//        foreach ($photoTag as $row)
-//            $row->delete();
-//
-//        $photo->delete();
-//    }
-//
-//    private function getCategoryId($item)
-//    {
-//        $category = !isset($item['id']) ? Category::create($item) : Category::find($item['id']);
-//        return $category->id;
-//    }
-//
-//    private function getTagsIds($tags)
-//    {
-//        $tagsIds = [];
-//        foreach ($tags as $tag) {
-//            $tag = !isset($tag['id']) ? Tag::create($tag) : Tag::find($tag['id']);
-//            $tagsIds = $tag->id;
-//        }
-//        return $tagsIds;
-//    }
+
+    public function destroy($category)
+    {
+        try {
+            Db::beginTransaction();
+            $category->delete();
+            $this->loggingSuccess($category, 'deleting');
+            Db::commit();
+        } catch (\Exception $exception) {
+            Db::rollBack();
+            $this->loggingFailed($exception, 'delete');
+
+            return [
+                'message' => "Category can't be deleted, {$category->posts->count()} belongs to it!",
+                'status' => 'danger',
+            ];
+        }
+
+        return [
+            'message' => 'Category successfully deleted!',
+            'status' => 'success',
+        ];
+    }
+
+    // Logs
+    private function loggingSuccess ($category, $action)
+    {
+        Log::channel('debuginfo')->info("Successful $action - category", [
+            'id' => $category->id,
+            'title' => $category->title,
+            'description' => $category->description,
+        ]);
+    }
+
+    private function loggingFailed ($exception, $action)
+    {
+        Log::channel('debuginfo')->error("Failed to $action - category", [
+           'error' => $exception->getMessage(),
+        ]);
+    }
 }

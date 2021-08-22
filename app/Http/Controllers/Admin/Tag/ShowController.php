@@ -12,11 +12,6 @@ class ShowController extends Controller
     {
         $posts = $tag->posts()->paginate(20);
 
-        foreach($posts as $post) {
-            $category = Category::find($post->category_id);
-            $post['category_title'] = $category->title;
-        }
-
         return view('admin.tag.show', compact('tag', 'posts'));
     }
 }

@@ -13,4 +13,9 @@ $(document).ready(function() {
             ['codeview', ['fullscreen', 'codeview', 'help']]
         ]
     });
+
+    // Flash
+    setTimeout(function () {
+        $('.flash-message').slideUp(700);
+    }, 3200);
 });

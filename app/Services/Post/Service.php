@@ -6,15 +6,14 @@ namespace App\Services\Post;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Service
 {
     public function index($posts)
     {
-        foreach ($posts as $post) {
-            $post['date'] = $this->getDate($post);
-        }
+        $posts = $this->getDates($posts);
 
         return $posts;
     }
@@ -33,11 +32,23 @@ class Service
             $post = Post::create($data);
             $post->tags()->attach($tagsIds);
 
+            $this->loggingSuccess($post, 'creating');
+
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
-            return $exception->getMessage();
+            $this->loggingFailed($exception, 'create');
+
+            return [
+                'message' => 'Failed to create post!',
+                'status' => 'danger',
+            ];
         }
+
+        return [
+            'message' => 'Post created successfully!',
+            'status' => 'success',
+        ];
     }
 
     public function update($post, $data)
@@ -54,21 +65,49 @@ class Service
             $post->update($data);
             $post->tags()->sync($tagsIds);
 
+            $this->loggingSuccess($post, 'updating');
+
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
-            return $exception->getMessage();
+            $this->loggingFailed($exception, 'update');
+
+            return [
+                'message' => 'Failed to update post!',
+                'status' => 'danger',
+            ];
         }
 
-        return $post->fresh();
+        $post->fresh();
+
+        return [
+            'message' => 'Post edited successfully!',
+            'status' => 'success',
+        ];
     }
 
     public function destroy($postTags, $post)
     {
-        foreach ($postTags as $row)
-            $row->delete();
+        try {
+            foreach ($postTags as $row)
+                $row->delete();
 
-        $post->delete();
+            $post->delete();
+            $this->loggingSuccess($post, 'deleting');
+        } catch (\Exception $exception) {
+            Db::rollBack();
+            $this->loggingFailed($exception, 'delete');
+
+            return [
+                'message' => 'Failed to delete post!',
+                'status' => 'danger',
+            ];
+        }
+
+        return [
+            'message' => 'Post successfully deleted!',
+            'status' => 'success',
+        ];
     }
 
     private function getTags($data)
@@ -109,14 +148,17 @@ class Service
         return $arr;
     }
 
-    public function getDate($post)
+    private function getDates($posts)
     {
-        $time = strtotime($post['created_at']);
-        $date = date('F j, Y', $time ).' at'.date(' H:i', $time);
-        return $date;
+        foreach ($posts as $post) {
+            $time = strtotime($post['created_at']);
+            $post['date'] = date('F j, Y', $time) . ' at' . date(' H:i', $time);
+        }
+
+        return $posts;
     }
 
-    public function setImages($data)
+    private function setImages($data)
     {
         if (isset($data['preview_image']))
             $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
@@ -125,5 +167,29 @@ class Service
             $data['main_image'] = Storage::disk('public')->put('/images', $data['main_image']);
 
         return $data;
+    }
+
+    // Logs
+    private function loggingSuccess ($post, $action)
+    {
+        Log::channel('debuginfo')->info("Successful $action - post", [
+            'id' => $post->id,
+            'title' => $post->title,
+            'category' => ['id' => $post->category->id, 'title' => $post->category->title],
+            'tags' => $post->tags->count(),
+            'preview' => 'string(' . strlen($post->preview) . ')',
+            'content' => 'string(' . strlen($post->content) . ')',
+            'preview_image' => $post->preview_image,
+            'main_image' => $post->main_image,
+            'status' => $post->is_published == 1 ? 'Active' : 'Inactive',
+            'deleted' => !empty($post->deleted_at) ? 'True' : 'False',
+        ]);
+    }
+
+    private function loggingFailed ($exception, $action)
+    {
+        Log::channel('debuginfo')->error("Failed to $action - post", [
+            'error' => $exception->getMessage(),
+        ]);
     }
 }

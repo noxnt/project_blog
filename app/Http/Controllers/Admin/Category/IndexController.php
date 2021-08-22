@@ -17,10 +17,6 @@ class IndexController extends Controller
 
         $categories = Category::filter($filter)->paginate(20);
 
-        foreach ($categories as $category) {
-            $category['count'] = Post::where('category_id', $category['id'])->count();
-        }
-
         return view('admin.category.index', compact('categories'));
     }
 }

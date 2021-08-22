@@ -98,7 +98,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group border border-secondary rounded p-2" style="background-color: #343a40;">
-                            <span style="color: rgba(255,255,255,0.5);">Tags:</span>
+                            <span class="tags-heading">Tags:</span>
                             @foreach($tags as $tag)
                                 <input class="tags-checkbox" id="tag{{ $tag->id }}" type="checkbox" value="{{ $tag->id }}" name="tags[]">
                                 <label class="tags-label" for="tag{{ $tag->id }}">
@@ -107,7 +107,7 @@
                             @endforeach
 
                             <hr style="background-color: rgba(255,255,255, 0.5) !important">
-                            <span style="color: rgba(255,255,255,0.5);">Add tags:</span>
+                            <span class="tags-heading">Add tags:</span>
 
                             <div class="form-group mb-0">
                                 <input class="form-control @error('newTags') is-invalid @enderror"

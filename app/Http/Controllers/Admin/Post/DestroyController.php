@@ -11,8 +11,8 @@ class DestroyController extends BaseController
     {
         $postTags = PostTag::where('post_id', $post->id)->get();
 
-        $this->service->destroy($postTags, $post);
+        $flash = $this->service->destroy($postTags, $post);
 
-        return redirect()->route('admin.post.index');
+        return redirect()->route('admin.post.index')->with($flash);
     }
 }

@@ -16,7 +16,7 @@
             </div>
 
             <div class="form-group col-md-1">
-                <input type="submit" class="btn btn-dark btn-light-border" value="Update" style="width: 100%">
+                <input type="submit" class="btn btn-dark btn-light-border w-100" value="Update">
             </div>
         </div>
 
@@ -44,12 +44,16 @@
         <tbody>
         @foreach($posts as $post)
             <tr class="link-detail">
-                <th scope="row">{{ $post['id'] }}</th>
-                <td>{{ $post['title'] }}</td>
-                <td>{{ $post['preview'] }}</td>
+                <th scope="row">{{ $post->id }}</th>
                 <td>
-                    <span class="badge badge-{{ $post['is_published'] == 1 ? 'success' : 'warning' }} btn-badge">
-                        <i class="fa fa-eye{{ $post['is_published'] == 1 ? '' : '-slash' }}" aria-hidden="true"></i>
+                    <a class="badge badge-secondary btn-badge"
+                       href="{{ route('admin.post.edit', $post->id) }}">{{ $post->title }}
+                    </a>
+                </td>
+                <td>{{ $post->preview }}</td>
+                <td>
+                    <span class="badge badge-{{ $post->is_published == 1 ? 'success' : 'warning' }} btn-badge">
+                        <i class="fa fa-eye{{ $post->is_published == 1 ? '' : '-slash' }}" aria-hidden="true"></i>
                     </span>
                 </td>
             </tr>

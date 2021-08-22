@@ -26,10 +26,14 @@
         </thead>
         <tbody>
         @foreach($posts as $post)
-            <tr class="link-detail">
-                <th scope="row">{{ $post['id'] }}</th>
-                <td>{{ $post['title'] }}</td>
-                <td>{{ $post['preview'] }}</td>
+            <tr>
+                <th scope="row">{{ $post->id }}</th>
+                <td>
+                    <a class="badge badge-secondary btn-badge"
+                        href="{{ route('admin.post.edit', $post->id) }}">{{ $post->title }}
+                    </a>
+                </td>
+                <td>{{ $post->preview }}</td>
                 <td>
                     <a class="badge badge-secondary btn-badge" href="{{ route('admin.category.show', $post->category->id) }}">
                         {{ $post->category->title }}
@@ -55,7 +59,7 @@
                     </div>
                 </td>
                 <td scope="col">
-                    <form action="{{ route('admin.post.destroy', $post['id']) }}" method="POST">
+                    <form action="{{ route('admin.post.destroy', $post->id) }}" method="POST">
                         @csrf
                         @method('delete')
                         <input class="btn btn-danger btn-badge" type="submit" value="Delete">
@@ -70,6 +74,6 @@
         <div class="admin-pagination w-75">
             {{ $posts->withQueryString()->links() }}
         </div>
-        <a href="{{ route('admin.post.create') }}" type="button" class="btn btn-light w-25" style="margin-bottom: 1rem">Create new post</a>
+        <a href="{{ route('admin.post.create') }}" type="button" class="btn btn-light w-25 mb-3">Create new post</a>
     </div>
 @endsection
