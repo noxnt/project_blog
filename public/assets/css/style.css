@@ -3378,19 +3378,17 @@ ul {
   background: #fff;
   margin-bottom: 8px;
   margin-right: 13px;
+  padding: 2px 4px;
   transition: all 0.3s ease 0s;
-  color: #888888;
+  color: #fc4600;;
   font-size: 13px;
   font-family: "Cardo", serif;
   font-weight: 600;
   text-transform: uppercase;
-  color: #2a2a2a;
-  width: 45px;
-  height: 45px;
+  height: 30px;
   text-align: center;
-  line-height: 45px;
+  line-height: 30px;
   -webkit-transition: 0.5s;
-  transition: 0.5s;
 }
 
 /* line 124, /Applications/MAMP/htdocs/palash/cl/july 2019/191 Lifeleck Blog/191 Lifeleck Blog html/sass/_all_post.scss */
@@ -5379,6 +5377,21 @@ h6 {
 .footer-area .copyright_text .footer-social a {
   color: #b9babb;
   margin-left: 20px;
+}
+
+.tags-list .tags-item {
+    display: inline-block;
+    padding: 5px;
+}
+
+.tags-list .tags-item a {
+    color: #fc4600;
+}
+
+.tags-list .tags-item a:hover {
+    padding: 2px;
+    color: #fff !important;
+    background-color: #fc4600 !important;
 }
 
 /*# sourceMappingURL=../css/style.map */

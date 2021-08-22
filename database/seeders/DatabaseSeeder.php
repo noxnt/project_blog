@@ -6,7 +6,10 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Role;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,6 +34,13 @@ class DatabaseSeeder extends Seeder
             ['name' => 'user'],
             ['name' => 'manager'],
             ['name' => 'admin'],
+        ]);
+
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@email.com',
+            'role' => '3',
+            'password' => Hash::make('11223344'),
         ]);
     }
 }

@@ -23,12 +23,12 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence(3),
+            'title' => $this->faker->unique()->sentence(3),
             'category_id' => Category::get()->random()->id,
             'preview' => $this->faker->text(20),
             'content' => $this->faker->text,
-            'preview_image' => 'images/default.jpg',
-            'main_image' => 'images/default.jpg',
+            'preview_image' => 'images/default/' . rand(1, 5) . '.jpg',
+            'main_image' => 'images/default/' . rand(1, 5) . '.jpg',
             'is_published' => 1,
         ];
     }

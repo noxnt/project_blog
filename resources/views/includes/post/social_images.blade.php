@@ -5,54 +5,16 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="social_connect">
+                    @foreach($posts->take(6) as $post)
                     <div class="single-social_connect">
                         <div class="social_connect_img">
-                            <img src="{{ asset('assets/img/insta/instagram_1.png') }}" class="" alt="blog">
+                            <img src="{{ asset('storage/' . $post->preview_image) }}" class="" alt="blog">
                             <div class="social_connect_overlay">
-                                <a href="#"><span class="ti-instagram"></span></a>
+                                <a href="{{ route('post.show', $post->id) }}"><span class="ti-instagram"></span></a>
                             </div>
                         </div>
                     </div>
-                    <div class="single-social_connect">
-                        <div class="social_connect_img">
-                            <img src="{{ asset('assets/img/insta/instagram_2.png') }}" class="" alt="blog">
-                            <div class="social_connect_overlay">
-                                <a href="#"><span class="ti-instagram"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-social_connect">
-                        <div class="social_connect_img">
-                            <img src="{{ asset('assets/img/insta/instagram_3.png') }}" class="" alt="blog">
-                            <div class="social_connect_overlay">
-                                <a href="#"><span class="ti-instagram"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-social_connect">
-                        <div class="social_connect_img">
-                            <img src="{{ asset('assets/img/insta/instagram_4.png') }}" class="" alt="blog">
-                            <div class="social_connect_overlay">
-                                <a href="#"><span class="ti-instagram"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-social_connect">
-                        <div class="social_connect_img">
-                            <img src="{{ asset('assets/img/insta/instagram_5.png') }}" class="" alt="blog">
-                            <div class="social_connect_overlay">
-                                <a href="#"><span class="ti-instagram"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-social_connect">
-                        <div class="social_connect_img">
-                            <img src="{{ asset('assets/img/insta/instagram_6.png') }}" class="" alt="blog">
-                            <div class="social_connect_overlay">
-                                <a href="#"><span class="ti-instagram"></span></a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

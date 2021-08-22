@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/auth/', 'HomeController@index');
+Route::get('/home/', 'HomeController@index')->name('home');
 
-Route::group(['namespace' => 'Post'], function () {
+Route::get('/', function () {
+    return redirect('posts');
+});
+
+Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
     route::get('/', 'IndexController')->name('post.index');
-//    route::get('/', 'ShowController')->name('post.show');
+    route::get('/{post}', 'ShowController')->name('post.show');
 });
 
 // Admin
@@ -56,5 +59,3 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'can:
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

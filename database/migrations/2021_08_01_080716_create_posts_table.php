@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->foreignId('category_id');
             $table->string('preview');
-            $table->string('content');
+            $table->text('content');
             $table->string('preview_image');
             $table->string('main_image');
             $table->boolean('is_published')->default(1);

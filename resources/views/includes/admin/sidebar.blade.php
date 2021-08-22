@@ -44,20 +44,20 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-friends"></i>
-                        <p>Users</p>
-                    </a>
-                </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a href="#" class="nav-link">--}}
+{{--                        <i class="nav-icon fas fa-user-friends"></i>--}}
+{{--                        <p>Users</p>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
-                <li class="nav-header">LOGS</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-cogs"></i>
-                        <p>Blog logs</p>
-                    </a>
-                </li>
+{{--                <li class="nav-header">LOGS</li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a href="#" class="nav-link">--}}
+{{--                        <i class="nav-icon fas fa-cogs"></i>--}}
+{{--                        <p>Blog logs</p>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
             </ul>
         </nav>

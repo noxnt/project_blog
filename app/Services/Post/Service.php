@@ -148,7 +148,7 @@ class Service
         return $arr;
     }
 
-    private function getDates($posts)
+    public function getDates($posts)
     {
         foreach ($posts as $post) {
             $time = strtotime($post['created_at']);
